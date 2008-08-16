@@ -2380,12 +2380,15 @@ static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_int) {
 
 /* end wrapper section */
 /* init section */
+#ifdef COMPILE_DL_LWES
 #ifdef __cplusplus
 extern "C" {
 #endif
 ZEND_GET_MODULE(lwes)
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 PHP_MSHUTDOWN_FUNCTION(lwes)
