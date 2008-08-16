@@ -33,9 +33,6 @@ AC_SUBST(USE_MAINTAINER_MODE)
 dnl -- make sure we have a C compiler
 AC_PROG_CC
 
-dnl -- check for libtool
-AM_PROG_LIBTOOL
-
 dnl -- check for programs
 AC_PATH_PROG([PHPCONFIG], [php-config])
 
