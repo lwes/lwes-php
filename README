@@ -1,2 +1,27 @@
 This is the PHP API for the Light Weight Event System.
 
+It uses a PECL-compatible build system, so the simplest way
+to compile and install this package is:
+
+  1. ./bootstrap
+  2. ./configure
+  3. make
+  4. make install
+
+This will attempt to build and install the LWES extension into the
+modules directory defined by "php-config".  Note that you must have
+the LWES library installed first before you can install the PHP extension,
+as well as have pkg-config setup to detect the location of the library.
+
+You may need to edit the PKG_CONFIG_PATH variable if your system has
+trouble detecting the location of LWES.  Most commonly, the following
+environment variable needs to be set before running the above steps:
+
+  export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+
+So that pkg-config can pick up the .pc file needed to configure LWES.
+
+However, if you are using a system install of LWES in /usr, usually
+pkgconfig will pick up the .pc file in /usr/lib/pkgconfig, and no
+manual intervention is necessary.
+
