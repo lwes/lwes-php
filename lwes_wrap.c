@@ -780,203 +780,10 @@ extern "C" {
 
 
 
-struct lwes_event_type_db *
-create_db(char *filename)
-{
-  return lwes_event_type_db_create(filename);
-}
-
-int
-destroy_db(struct lwes_event_type_db* db)
-{
-  return lwes_event_type_db_destroy(db);
-}
-
-struct lwes_emitter *
-create_emitter(char *address, char *iface, int port,
-               int emit_heartbeat, short freq)
-{
-  return lwes_emitter_create(address, iface, port, emit_heartbeat, freq);
-}
-
-struct lwes_emitter *
-create_emitter_with_ttl(char *address, char *iface, int port,
-                        int emit_heartbeat, short freq, int ttl)
-{
-  return lwes_emitter_create_with_ttl(address, iface, port, emit_heartbeat,
-                                      freq, ttl);
-}
-
-int
-emit(struct lwes_emitter *emitter, struct lwes_event *event)
-{
-  return lwes_emitter_emit(emitter, event);
-}
-
-int
-emitto(char *address, char *iface, int port, struct lwes_emitter *emitter,
-       struct lwes_event *event)
-{
-  return lwes_emitter_emitto(address, iface, port, emitter, event);
-}
-
-int
-destroy_emitter(struct lwes_emitter *emitter)
-{
-  return lwes_emitter_destroy(emitter);
-}
-
 struct lwes_event *
-create_event(struct lwes_event_type_db* db, char *event_name)
+lwes_event_create_no_db(char *event_name)
 {
-  return lwes_event_create(db, event_name);
-}
-
-struct lwes_event *
-create_event_with_encoding(struct lwes_event_type_db *db, char *event_name,
-                           short encoding)
-{
-  return lwes_event_create_with_encoding(db, event_name, encoding);
-}
-
-int
-set_uint16(struct lwes_event *event, char *attribute_name,
-           unsigned short a_uint16)
-{
-  return lwes_event_set_U_INT_16(event, attribute_name, a_uint16);
-}
-
-int
-get_uint16(struct lwes_event* event, char* attribute_name,
-           unsigned short *a_uint16)
-{
-  return lwes_event_get_U_INT_16(event, attribute_name, a_uint16);
-}
-
-int
-set_int16(struct lwes_event* event, char* attribute_name,
-          short an_int16)
-{
-  return lwes_event_set_INT_16(event, attribute_name, an_int16);
-}
-
-int
-get_int16(struct lwes_event* event, char* attribute_name,
-          short* an_int16)
-{
-  return lwes_event_get_INT_16(event, attribute_name, an_int16);
-}
-
-int
-set_uint32(struct lwes_event* event, char* attribute_name,
-           unsigned int a_uint32)
-{
-  return lwes_event_set_U_INT_32(event, attribute_name, a_uint32);
-}
-
-int
-get_uint32(struct lwes_event* event, char* attribute_name,
-           unsigned int * a_uint32)
-{
-  return lwes_event_get_U_INT_32(event, attribute_name, a_uint32);
-}
-
-int
-set_int32(struct lwes_event* event, char* attribute_name,
-          int an_int32)
-{
-  return lwes_event_set_INT_32(event, attribute_name, an_int32);
-}
-
-int
-get_int32(struct lwes_event* event, char* attribute_name,
-          int* an_int32)
-{
-  return lwes_event_get_INT_32(event, attribute_name, an_int32);
-}
-
-int
-set_uint64(struct lwes_event* event, char* attribute_name,
-           char* a_uint64)
-{
-  return lwes_event_set_U_INT_64_w_string(event, attribute_name, a_uint64);
-}
-
-int
-get_uint64(struct lwes_event* event, char* attribute_name,
-           unsigned long long * a_uint64)
-{
-  return lwes_event_get_U_INT_64(event, attribute_name, a_uint64);
-}
-
-int
-set_int64(struct lwes_event* event, char* attribute_name,
-          char* an_int64)
-{
-  return lwes_event_set_INT_64_w_string(event, attribute_name, an_int64);
-}
-
-int
-get_int64(struct lwes_event* event, char* attribute_name,
-          long long* an_int64)
-{
-  return lwes_event_get_INT_64(event, attribute_name, an_int64);
-}
-
-int
-set_string(struct lwes_event* event, char* attribute_name,
-           char* a_string)
-{
-  return lwes_event_set_STRING(event, attribute_name, a_string);
-}
-
-int
-get_string(struct lwes_event* event, char* attribute_name,
-           char** a_string)
-{
-  return lwes_event_get_STRING(event, attribute_name, a_string);
-}
-
-int
-set_ip_addr(struct lwes_event* event, char* attribute_name,
-            char* an_ip_addr)
-{
-  return lwes_event_set_IP_ADDR_w_string(event, attribute_name, an_ip_addr);
-}
-
-int
-get_ip_addr(struct lwes_event *event, char *attribute_name,
-            struct in_addr *an_ip_addr)
-{
-  return lwes_event_get_IP_ADDR(event, attribute_name, an_ip_addr);
-}
-
-int
-set_boolean(struct lwes_event* event, char* attribute_name,
-            int a_boolean)
-{
-  return lwes_event_set_BOOLEAN(event, attribute_name, a_boolean);
-}
-
-int
-get_boolean(struct lwes_event *event, char *attribute_name,
-            int *a_boolean)
-{
-  return lwes_event_get_BOOLEAN(event, attribute_name, a_boolean);
-}
-
-int
-destroy_event(struct lwes_event *event)
-{
-  return lwes_event_destroy(event);
-}
-
-void
-current_time_millis(char *buffer)
-{
-  LWES_INT_64 current_time = 0LL;
-  current_time = currentTimeMillisLongLong();
-  snprintf(buffer,17,"%016llX",current_time);
+  return lwes_event_create(NULL, event_name);
 }
 
 
@@ -986,64 +793,64 @@ current_time_millis(char *buffer)
 /* entry subsection */
 /* Every non-class user visible function must have an entry here */
 function_entry lwes_functions[] = {
-	ZEND_NAMED_FE(create_db,
-		_wrap_create_db, NULL)
-	ZEND_NAMED_FE(destroy_db,
-		_wrap_destroy_db, NULL)
-	ZEND_NAMED_FE(create_emitter,
-		_wrap_create_emitter, NULL)
-	ZEND_NAMED_FE(create_emitter_with_ttl,
-		_wrap_create_emitter_with_ttl, NULL)
-	ZEND_NAMED_FE(emit,
-		_wrap_emit, NULL)
-	ZEND_NAMED_FE(emitto,
-		_wrap_emitto, NULL)
-	ZEND_NAMED_FE(destroy_emitter,
-		_wrap_destroy_emitter, NULL)
-	ZEND_NAMED_FE(create_event,
-		_wrap_create_event, NULL)
-	ZEND_NAMED_FE(create_event_with_encoding,
-		_wrap_create_event_with_encoding, NULL)
-	ZEND_NAMED_FE(set_uint16,
-		_wrap_set_uint16, NULL)
-	ZEND_NAMED_FE(get_uint16,
-		_wrap_get_uint16, NULL)
-	ZEND_NAMED_FE(set_int16,
-		_wrap_set_int16, NULL)
-	ZEND_NAMED_FE(get_int16,
-		_wrap_get_int16, NULL)
-	ZEND_NAMED_FE(set_uint32,
-		_wrap_set_uint32, NULL)
-	ZEND_NAMED_FE(get_uint32,
-		_wrap_get_uint32, NULL)
-	ZEND_NAMED_FE(set_int32,
-		_wrap_set_int32, NULL)
-	ZEND_NAMED_FE(get_int32,
-		_wrap_get_int32, NULL)
-	ZEND_NAMED_FE(set_uint64,
-		_wrap_set_uint64, NULL)
-	ZEND_NAMED_FE(get_uint64,
-		_wrap_get_uint64, NULL)
-	ZEND_NAMED_FE(set_int64,
-		_wrap_set_int64, NULL)
-	ZEND_NAMED_FE(get_int64,
-		_wrap_get_int64, NULL)
-	ZEND_NAMED_FE(set_string,
-		_wrap_set_string, NULL)
-	ZEND_NAMED_FE(get_string,
-		_wrap_get_string, NULL)
-	ZEND_NAMED_FE(set_ip_addr,
-		_wrap_set_ip_addr, NULL)
-	ZEND_NAMED_FE(get_ip_addr,
-		_wrap_get_ip_addr, NULL)
-	ZEND_NAMED_FE(set_boolean,
-		_wrap_set_boolean, NULL)
-	ZEND_NAMED_FE(get_boolean,
-		_wrap_get_boolean, NULL)
-	ZEND_NAMED_FE(destroy_event,
-		_wrap_destroy_event, NULL)
-	ZEND_NAMED_FE(current_time_millis,
-		_wrap_current_time_millis, NULL)
+	ZEND_NAMED_FE(lwes_event_type_db_create,
+		_wrap_lwes_event_type_db_create, NULL)
+	ZEND_NAMED_FE(lwes_event_type_db_destroy,
+		_wrap_lwes_event_type_db_destroy, NULL)
+	ZEND_NAMED_FE(lwes_emitter_create,
+		_wrap_lwes_emitter_create, NULL)
+	ZEND_NAMED_FE(lwes_emitter_create_with_ttl,
+		_wrap_lwes_emitter_create_with_ttl, NULL)
+	ZEND_NAMED_FE(lwes_emitter_emit,
+		_wrap_lwes_emitter_emit, NULL)
+	ZEND_NAMED_FE(lwes_emitter_emitto,
+		_wrap_lwes_emitter_emitto, NULL)
+	ZEND_NAMED_FE(lwes_emitter_destroy,
+		_wrap_lwes_emitter_destroy, NULL)
+	ZEND_NAMED_FE(lwes_event_create,
+		_wrap_lwes_event_create, NULL)
+	ZEND_NAMED_FE(lwes_event_create_with_encoding,
+		_wrap_lwes_event_create_with_encoding, NULL)
+	ZEND_NAMED_FE(lwes_event_set_u_int_16,
+		_wrap_lwes_event_set_U_INT_16, NULL)
+	ZEND_NAMED_FE(lwes_event_get_u_int_16,
+		_wrap_lwes_event_get_U_INT_16, NULL)
+	ZEND_NAMED_FE(lwes_event_set_int_16,
+		_wrap_lwes_event_set_INT_16, NULL)
+	ZEND_NAMED_FE(lwes_event_get_int_16,
+		_wrap_lwes_event_get_INT_16, NULL)
+	ZEND_NAMED_FE(lwes_event_set_u_int_32,
+		_wrap_lwes_event_set_U_INT_32, NULL)
+	ZEND_NAMED_FE(lwes_event_get_u_int_32,
+		_wrap_lwes_event_get_U_INT_32, NULL)
+	ZEND_NAMED_FE(lwes_event_set_int_32,
+		_wrap_lwes_event_set_INT_32, NULL)
+	ZEND_NAMED_FE(lwes_event_get_int_32,
+		_wrap_lwes_event_get_INT_32, NULL)
+	ZEND_NAMED_FE(lwes_event_set_u_int_64,
+		_wrap_lwes_event_set_U_INT_64, NULL)
+	ZEND_NAMED_FE(lwes_event_get_u_int_64,
+		_wrap_lwes_event_get_U_INT_64, NULL)
+	ZEND_NAMED_FE(lwes_event_set_int_64,
+		_wrap_lwes_event_set_INT_64, NULL)
+	ZEND_NAMED_FE(lwes_event_get_int_64,
+		_wrap_lwes_event_get_INT_64, NULL)
+	ZEND_NAMED_FE(lwes_event_set_string,
+		_wrap_lwes_event_set_STRING, NULL)
+	ZEND_NAMED_FE(lwes_event_get_string,
+		_wrap_lwes_event_get_STRING, NULL)
+	ZEND_NAMED_FE(lwes_event_set_ip_addr_w_string,
+		_wrap_lwes_event_set_IP_ADDR_w_string, NULL)
+	ZEND_NAMED_FE(lwes_event_get_ip_addr,
+		_wrap_lwes_event_get_IP_ADDR, NULL)
+	ZEND_NAMED_FE(lwes_event_set_boolean,
+		_wrap_lwes_event_set_BOOLEAN, NULL)
+	ZEND_NAMED_FE(lwes_event_get_boolean,
+		_wrap_lwes_event_get_BOOLEAN, NULL)
+	ZEND_NAMED_FE(lwes_event_destroy,
+		_wrap_lwes_event_destroy, NULL)
+	ZEND_NAMED_FE(lwes_event_create_no_db,
+		_wrap_lwes_event_create_no_db, NULL)
 	{NULL, NULL, NULL}
 };
 
@@ -1112,7 +919,7 @@ static int le_swig__p_short=0; /* handle for  */
 static int le_swig__p_int=0; /* handle for  */
 /* end vdecl subsection */
 /* wrapper section */
-ZEND_NAMED_FUNCTION(_wrap_create_db) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_type_db_create) {
     char *arg1 = (char *) 0 ;
     struct lwes_event_type_db *result;
     zval **args[2];
@@ -1126,11 +933,16 @@ ZEND_NAMED_FUNCTION(_wrap_create_db) {
         WRONG_PARAM_COUNT;
     }
     
-    
-    convert_to_string_ex(((0<argbase)?(&this_ptr):(args[0-argbase])));
-    arg1 = (char *) Z_STRVAL_PP(((0<argbase)?(&this_ptr):(args[0-argbase])));
-    
-    result = (struct lwes_event_type_db *)create_db(arg1);
+    {
+        if ((*((0<argbase)?(&this_ptr):(args[0-argbase])))->type == IS_NULL) {
+            arg1 = NULL;
+        } else {
+            convert_to_string_ex(((0<argbase)?(&this_ptr):(args[0-argbase])));
+            arg1 = Z_STRVAL_PP(((0<argbase)?(&this_ptr):(args[0-argbase])));
+        }
+        
+    }
+    result = (struct lwes_event_type_db *)lwes_event_type_db_create(arg1);
     
     
     SWIG_SetPointerZval(return_value, (void *)result, SWIGTYPE_p_lwes_event_type_db, 0);
@@ -1138,7 +950,7 @@ ZEND_NAMED_FUNCTION(_wrap_create_db) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_destroy_db) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_type_db_destroy) {
     struct lwes_event_type_db *arg1 = (struct lwes_event_type_db *) 0 ;
     int result;
     zval **args[2];
@@ -1152,12 +964,17 @@ ZEND_NAMED_FUNCTION(_wrap_destroy_db) {
         WRONG_PARAM_COUNT;
     }
     
-    
-    if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event_type_db) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of destroy_db. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event_type_db->name);
+    {
+        if ((*((0<argbase)?(&this_ptr):(args[0-argbase])))->type == IS_NULL) {
+            arg1 = NULL;
+        } else {
+            if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **)&arg1, SWIGTYPE_p_lwes_event_type_db) < 0) {
+                arg1 = NULL;
+            }
+        }
+        
     }
-    
-    result = (int)destroy_db(arg1);
+    result = (int)lwes_event_type_db_destroy(arg1);
     
     
     ZVAL_LONG(return_value,result);
@@ -1165,7 +982,7 @@ ZEND_NAMED_FUNCTION(_wrap_destroy_db) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_create_emitter) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_emitter_create) {
     char *arg1 = (char *) 0 ;
     char *arg2 = (char *) 0 ;
     int arg3 ;
@@ -1183,14 +1000,24 @@ ZEND_NAMED_FUNCTION(_wrap_create_emitter) {
         WRONG_PARAM_COUNT;
     }
     
-    
-    convert_to_string_ex(((0<argbase)?(&this_ptr):(args[0-argbase])));
-    arg1 = (char *) Z_STRVAL_PP(((0<argbase)?(&this_ptr):(args[0-argbase])));
-    
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*((0<argbase)?(&this_ptr):(args[0-argbase])))->type == IS_NULL) {
+            arg1 = NULL;
+        } else {
+            convert_to_string_ex(((0<argbase)?(&this_ptr):(args[0-argbase])));
+            arg1 = Z_STRVAL_PP(((0<argbase)?(&this_ptr):(args[0-argbase])));
+        }
+        
+    }
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     convert_to_long_ex(args[2-argbase]);
     arg3 = (int) Z_LVAL_PP(args[2-argbase]);
@@ -1203,7 +1030,7 @@ ZEND_NAMED_FUNCTION(_wrap_create_emitter) {
     convert_to_long_ex(args[4-argbase]);
     arg5 = (short) Z_LVAL_PP(args[4-argbase]);
     
-    result = (struct lwes_emitter *)create_emitter(arg1,arg2,arg3,arg4,arg5);
+    result = (struct lwes_emitter *)lwes_emitter_create(arg1,arg2,arg3,arg4,arg5);
     
     
     SWIG_SetPointerZval(return_value, (void *)result, SWIGTYPE_p_lwes_emitter, 0);
@@ -1211,7 +1038,7 @@ ZEND_NAMED_FUNCTION(_wrap_create_emitter) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_create_emitter_with_ttl) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_emitter_create_with_ttl) {
     char *arg1 = (char *) 0 ;
     char *arg2 = (char *) 0 ;
     int arg3 ;
@@ -1230,14 +1057,24 @@ ZEND_NAMED_FUNCTION(_wrap_create_emitter_with_ttl) {
         WRONG_PARAM_COUNT;
     }
     
-    
-    convert_to_string_ex(((0<argbase)?(&this_ptr):(args[0-argbase])));
-    arg1 = (char *) Z_STRVAL_PP(((0<argbase)?(&this_ptr):(args[0-argbase])));
-    
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*((0<argbase)?(&this_ptr):(args[0-argbase])))->type == IS_NULL) {
+            arg1 = NULL;
+        } else {
+            convert_to_string_ex(((0<argbase)?(&this_ptr):(args[0-argbase])));
+            arg1 = Z_STRVAL_PP(((0<argbase)?(&this_ptr):(args[0-argbase])));
+        }
+        
+    }
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     convert_to_long_ex(args[2-argbase]);
     arg3 = (int) Z_LVAL_PP(args[2-argbase]);
@@ -1254,7 +1091,7 @@ ZEND_NAMED_FUNCTION(_wrap_create_emitter_with_ttl) {
     convert_to_long_ex(args[5-argbase]);
     arg6 = (int) Z_LVAL_PP(args[5-argbase]);
     
-    result = (struct lwes_emitter *)create_emitter_with_ttl(arg1,arg2,arg3,arg4,arg5,arg6);
+    result = (struct lwes_emitter *)lwes_emitter_create_with_ttl(arg1,arg2,arg3,arg4,arg5,arg6);
     
     
     SWIG_SetPointerZval(return_value, (void *)result, SWIGTYPE_p_lwes_emitter, 0);
@@ -1262,7 +1099,7 @@ ZEND_NAMED_FUNCTION(_wrap_create_emitter_with_ttl) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_emit) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_emitter_emit) {
     struct lwes_emitter *arg1 = (struct lwes_emitter *) 0 ;
     struct lwes_event *arg2 = (struct lwes_event *) 0 ;
     int result;
@@ -1279,15 +1116,15 @@ ZEND_NAMED_FUNCTION(_wrap_emit) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_emitter) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of emit. Expected %s", 1-argbase, SWIGTYPE_p_lwes_emitter->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_emitter_emit. Expected %s", 1-argbase, SWIGTYPE_p_lwes_emitter->name);
     }
     
     
     if(SWIG_ConvertPtr(*args[1-argbase], (void **) &arg2, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of emit. Expected %s", 2-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_emitter_emit. Expected %s", 2-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    result = (int)emit(arg1,arg2);
+    result = (int)lwes_emitter_emit(arg1,arg2);
     
     
     ZVAL_LONG(return_value,result);
@@ -1295,7 +1132,7 @@ ZEND_NAMED_FUNCTION(_wrap_emit) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_emitto) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_emitter_emitto) {
     char *arg1 = (char *) 0 ;
     char *arg2 = (char *) 0 ;
     int arg3 ;
@@ -1313,29 +1150,39 @@ ZEND_NAMED_FUNCTION(_wrap_emitto) {
         WRONG_PARAM_COUNT;
     }
     
-    
-    convert_to_string_ex(((0<argbase)?(&this_ptr):(args[0-argbase])));
-    arg1 = (char *) Z_STRVAL_PP(((0<argbase)?(&this_ptr):(args[0-argbase])));
-    
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*((0<argbase)?(&this_ptr):(args[0-argbase])))->type == IS_NULL) {
+            arg1 = NULL;
+        } else {
+            convert_to_string_ex(((0<argbase)?(&this_ptr):(args[0-argbase])));
+            arg1 = Z_STRVAL_PP(((0<argbase)?(&this_ptr):(args[0-argbase])));
+        }
+        
+    }
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     convert_to_long_ex(args[2-argbase]);
     arg3 = (int) Z_LVAL_PP(args[2-argbase]);
     
     
     if(SWIG_ConvertPtr(*args[3-argbase], (void **) &arg4, SWIGTYPE_p_lwes_emitter) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of emitto. Expected %s", 4-argbase, SWIGTYPE_p_lwes_emitter->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_emitter_emitto. Expected %s", 4-argbase, SWIGTYPE_p_lwes_emitter->name);
     }
     
     
     if(SWIG_ConvertPtr(*args[4-argbase], (void **) &arg5, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of emitto. Expected %s", 5-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_emitter_emitto. Expected %s", 5-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    result = (int)emitto(arg1,arg2,arg3,arg4,arg5);
+    result = (int)lwes_emitter_emitto(arg1,arg2,arg3,arg4,arg5);
     
     
     ZVAL_LONG(return_value,result);
@@ -1343,7 +1190,7 @@ ZEND_NAMED_FUNCTION(_wrap_emitto) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_destroy_emitter) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_emitter_destroy) {
     struct lwes_emitter *arg1 = (struct lwes_emitter *) 0 ;
     int result;
     zval **args[2];
@@ -1359,10 +1206,10 @@ ZEND_NAMED_FUNCTION(_wrap_destroy_emitter) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_emitter) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of destroy_emitter. Expected %s", 1-argbase, SWIGTYPE_p_lwes_emitter->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_emitter_destroy. Expected %s", 1-argbase, SWIGTYPE_p_lwes_emitter->name);
     }
     
-    result = (int)destroy_emitter(arg1);
+    result = (int)lwes_emitter_destroy(arg1);
     
     
     ZVAL_LONG(return_value,result);
@@ -1370,7 +1217,7 @@ ZEND_NAMED_FUNCTION(_wrap_destroy_emitter) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_create_event) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_create) {
     struct lwes_event_type_db *arg1 = (struct lwes_event_type_db *) 0 ;
     char *arg2 = (char *) 0 ;
     struct lwes_event *result;
@@ -1385,16 +1232,26 @@ ZEND_NAMED_FUNCTION(_wrap_create_event) {
         WRONG_PARAM_COUNT;
     }
     
-    
-    if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event_type_db) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of create_event. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event_type_db->name);
+    {
+        if ((*((0<argbase)?(&this_ptr):(args[0-argbase])))->type == IS_NULL) {
+            arg1 = NULL;
+        } else {
+            if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **)&arg1, SWIGTYPE_p_lwes_event_type_db) < 0) {
+                arg1 = NULL;
+            }
+        }
+        
     }
-    
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
-    result = (struct lwes_event *)create_event(arg1,arg2);
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
+    result = (struct lwes_event *)lwes_event_create(arg1,arg2);
     
     
     SWIG_SetPointerZval(return_value, (void *)result, SWIGTYPE_p_lwes_event, 0);
@@ -1402,7 +1259,7 @@ ZEND_NAMED_FUNCTION(_wrap_create_event) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_create_event_with_encoding) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_create_with_encoding) {
     struct lwes_event_type_db *arg1 = (struct lwes_event_type_db *) 0 ;
     char *arg2 = (char *) 0 ;
     short arg3 ;
@@ -1418,20 +1275,30 @@ ZEND_NAMED_FUNCTION(_wrap_create_event_with_encoding) {
         WRONG_PARAM_COUNT;
     }
     
-    
-    if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event_type_db) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of create_event_with_encoding. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event_type_db->name);
+    {
+        if ((*((0<argbase)?(&this_ptr):(args[0-argbase])))->type == IS_NULL) {
+            arg1 = NULL;
+        } else {
+            if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **)&arg1, SWIGTYPE_p_lwes_event_type_db) < 0) {
+                arg1 = NULL;
+            }
+        }
+        
     }
-    
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     convert_to_long_ex(args[2-argbase]);
     arg3 = (short) Z_LVAL_PP(args[2-argbase]);
     
-    result = (struct lwes_event *)create_event_with_encoding(arg1,arg2,arg3);
+    result = (struct lwes_event *)lwes_event_create_with_encoding(arg1,arg2,arg3);
     
     
     SWIG_SetPointerZval(return_value, (void *)result, SWIGTYPE_p_lwes_event, 0);
@@ -1439,7 +1306,7 @@ ZEND_NAMED_FUNCTION(_wrap_create_event_with_encoding) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_set_uint16) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_set_U_INT_16) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     unsigned short arg3 ;
@@ -1457,18 +1324,23 @@ ZEND_NAMED_FUNCTION(_wrap_set_uint16) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of set_uint16. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_set_U_INT_16. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     convert_to_long_ex(args[2-argbase]);
     arg3 = (unsigned short) Z_LVAL_PP(args[2-argbase]);
     
-    result = (int)set_uint16(arg1,arg2,arg3);
+    result = (int)lwes_event_set_U_INT_16(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -1476,7 +1348,7 @@ ZEND_NAMED_FUNCTION(_wrap_set_uint16) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_get_uint16) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_get_U_INT_16) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     unsigned short *arg3 = (unsigned short *) 0 ;
@@ -1497,13 +1369,18 @@ ZEND_NAMED_FUNCTION(_wrap_get_uint16) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_uint16. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_U_INT_16. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     /* inout typemap for unsigned short using convert_to_long_ex and ZVAL_LONG */
     if(SWIG_ConvertPtr(*args[2-argbase], (void **) &arg3, SWIGTYPE_p_unsigned_short) < 0) {
@@ -1528,12 +1405,12 @@ ZEND_NAMED_FUNCTION(_wrap_get_uint16) {
         } else {
             /* wasn't a pre/ref/thing, OR anything like an int thing */
             force3=0;
-            zend_error(E_ERROR, "Type error in argument %d of get_uint16. Expected %s or at least something looking vaguely like a number hopefully passed by reference", 3-argbase, SWIGTYPE_p_unsigned_short->name);
+            zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_U_INT_16. Expected %s or at least something looking vaguely like a number hopefully passed by reference", 3-argbase, SWIGTYPE_p_unsigned_short->name);
         }
     } else force3=0;
     
     _saved[0] = args[2-argbase];
-    result = (int)get_uint16(arg1,arg2,arg3);
+    result = (int)lwes_event_get_U_INT_16(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -1542,7 +1419,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_uint16) {
     if (force3) {
         /* pass back arg3 through params (_saved[0]) if we can */
         if(! PZVAL_IS_REF(*_saved[0])) {
-            zend_error(E_WARNING, "Parameter %d of get_uint16 wasn't passed by reference [argout unsigned short *, unsigned short &]",3-argbase);
+            zend_error(E_WARNING, "Parameter %d of lwes_event_get_U_INT_16 wasn't passed by reference [argout unsigned short *, unsigned short &]",3-argbase);
         } else {
             ZVAL_LONG(*_saved[0],intr3);	
         }
@@ -1551,7 +1428,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_uint16) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_set_int16) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_set_INT_16) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     short arg3 ;
@@ -1569,18 +1446,23 @@ ZEND_NAMED_FUNCTION(_wrap_set_int16) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of set_int16. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_set_INT_16. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     convert_to_long_ex(args[2-argbase]);
     arg3 = (short) Z_LVAL_PP(args[2-argbase]);
     
-    result = (int)set_int16(arg1,arg2,arg3);
+    result = (int)lwes_event_set_INT_16(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -1588,7 +1470,7 @@ ZEND_NAMED_FUNCTION(_wrap_set_int16) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_get_int16) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_get_INT_16) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     short *arg3 = (short *) 0 ;
@@ -1609,13 +1491,18 @@ ZEND_NAMED_FUNCTION(_wrap_get_int16) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_int16. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_INT_16. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     /* inout typemap for short using convert_to_long_ex and ZVAL_LONG */
     if(SWIG_ConvertPtr(*args[2-argbase], (void **) &arg3, SWIGTYPE_p_short) < 0) {
@@ -1640,12 +1527,12 @@ ZEND_NAMED_FUNCTION(_wrap_get_int16) {
         } else {
             /* wasn't a pre/ref/thing, OR anything like an int thing */
             force3=0;
-            zend_error(E_ERROR, "Type error in argument %d of get_int16. Expected %s or at least something looking vaguely like a number hopefully passed by reference", 3-argbase, SWIGTYPE_p_short->name);
+            zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_INT_16. Expected %s or at least something looking vaguely like a number hopefully passed by reference", 3-argbase, SWIGTYPE_p_short->name);
         }
     } else force3=0;
     
     _saved[0] = args[2-argbase];
-    result = (int)get_int16(arg1,arg2,arg3);
+    result = (int)lwes_event_get_INT_16(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -1654,7 +1541,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_int16) {
     if (force3) {
         /* pass back arg3 through params (_saved[0]) if we can */
         if(! PZVAL_IS_REF(*_saved[0])) {
-            zend_error(E_WARNING, "Parameter %d of get_int16 wasn't passed by reference [argout short *, short &]",3-argbase);
+            zend_error(E_WARNING, "Parameter %d of lwes_event_get_INT_16 wasn't passed by reference [argout short *, short &]",3-argbase);
         } else {
             ZVAL_LONG(*_saved[0],intr3);	
         }
@@ -1663,7 +1550,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_int16) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_set_uint32) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_set_U_INT_32) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     unsigned int arg3 ;
@@ -1681,18 +1568,23 @@ ZEND_NAMED_FUNCTION(_wrap_set_uint32) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of set_uint32. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_set_U_INT_32. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     convert_to_long_ex(args[2-argbase]);
     arg3 = (unsigned int) Z_LVAL_PP(args[2-argbase]);
     
-    result = (int)set_uint32(arg1,arg2,arg3);
+    result = (int)lwes_event_set_U_INT_32(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -1700,7 +1592,7 @@ ZEND_NAMED_FUNCTION(_wrap_set_uint32) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_get_uint32) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_get_U_INT_32) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     unsigned int *arg3 = (unsigned int *) 0 ;
@@ -1721,13 +1613,18 @@ ZEND_NAMED_FUNCTION(_wrap_get_uint32) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_uint32. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_U_INT_32. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     /* inout typemap for unsigned int using convert_to_long_ex and ZVAL_LONG */
     if(SWIG_ConvertPtr(*args[2-argbase], (void **) &arg3, SWIGTYPE_p_unsigned_int) < 0) {
@@ -1752,12 +1649,12 @@ ZEND_NAMED_FUNCTION(_wrap_get_uint32) {
         } else {
             /* wasn't a pre/ref/thing, OR anything like an int thing */
             force3=0;
-            zend_error(E_ERROR, "Type error in argument %d of get_uint32. Expected %s or at least something looking vaguely like a number hopefully passed by reference", 3-argbase, SWIGTYPE_p_unsigned_int->name);
+            zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_U_INT_32. Expected %s or at least something looking vaguely like a number hopefully passed by reference", 3-argbase, SWIGTYPE_p_unsigned_int->name);
         }
     } else force3=0;
     
     _saved[0] = args[2-argbase];
-    result = (int)get_uint32(arg1,arg2,arg3);
+    result = (int)lwes_event_get_U_INT_32(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -1766,7 +1663,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_uint32) {
     if (force3) {
         /* pass back arg3 through params (_saved[0]) if we can */
         if(! PZVAL_IS_REF(*_saved[0])) {
-            zend_error(E_WARNING, "Parameter %d of get_uint32 wasn't passed by reference [argout unsigned int *, unsigned int &]",3-argbase);
+            zend_error(E_WARNING, "Parameter %d of lwes_event_get_U_INT_32 wasn't passed by reference [argout unsigned int *, unsigned int &]",3-argbase);
         } else {
             ZVAL_LONG(*_saved[0],intr3);	
         }
@@ -1775,7 +1672,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_uint32) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_set_int32) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_set_INT_32) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     int arg3 ;
@@ -1793,18 +1690,23 @@ ZEND_NAMED_FUNCTION(_wrap_set_int32) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of set_int32. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_set_INT_32. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     convert_to_long_ex(args[2-argbase]);
     arg3 = (int) Z_LVAL_PP(args[2-argbase]);
     
-    result = (int)set_int32(arg1,arg2,arg3);
+    result = (int)lwes_event_set_INT_32(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -1812,7 +1714,7 @@ ZEND_NAMED_FUNCTION(_wrap_set_int32) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_get_int32) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_get_INT_32) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     int *arg3 = (int *) 0 ;
@@ -1833,13 +1735,18 @@ ZEND_NAMED_FUNCTION(_wrap_get_int32) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_int32. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_INT_32. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     /* inout typemap for int using convert_to_long_ex and ZVAL_LONG */
     if(SWIG_ConvertPtr(*args[2-argbase], (void **) &arg3, SWIGTYPE_p_int) < 0) {
@@ -1864,12 +1771,12 @@ ZEND_NAMED_FUNCTION(_wrap_get_int32) {
         } else {
             /* wasn't a pre/ref/thing, OR anything like an int thing */
             force3=0;
-            zend_error(E_ERROR, "Type error in argument %d of get_int32. Expected %s or at least something looking vaguely like a number hopefully passed by reference", 3-argbase, SWIGTYPE_p_int->name);
+            zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_INT_32. Expected %s or at least something looking vaguely like a number hopefully passed by reference", 3-argbase, SWIGTYPE_p_int->name);
         }
     } else force3=0;
     
     _saved[0] = args[2-argbase];
-    result = (int)get_int32(arg1,arg2,arg3);
+    result = (int)lwes_event_get_INT_32(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -1878,7 +1785,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_int32) {
     if (force3) {
         /* pass back arg3 through params (_saved[0]) if we can */
         if(! PZVAL_IS_REF(*_saved[0])) {
-            zend_error(E_WARNING, "Parameter %d of get_int32 wasn't passed by reference [argout int *, int &]",3-argbase);
+            zend_error(E_WARNING, "Parameter %d of lwes_event_get_INT_32 wasn't passed by reference [argout int *, int &]",3-argbase);
         } else {
             ZVAL_LONG(*_saved[0],intr3);	
         }
@@ -1887,10 +1794,10 @@ ZEND_NAMED_FUNCTION(_wrap_get_int32) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_set_uint64) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_set_U_INT_64) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
-    char *arg3 = (char *) 0 ;
+    unsigned long long arg3 ;
     int result;
     zval **args[4];
     int argbase=0 ;
@@ -1905,18 +1812,26 @@ ZEND_NAMED_FUNCTION(_wrap_set_uint64) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of set_uint64. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_set_U_INT_64. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
-    
-    convert_to_string_ex(args[2-argbase]);
-    arg3 = (char *) Z_STRVAL_PP(args[2-argbase]);
-    
-    result = (int)set_uint64(arg1,arg2,arg3);
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
+    {
+        unsigned long long * argp;
+        if(SWIG_ConvertPtr(*args[2-argbase], (void **) &argp, SWIGTYPE_p_unsigned_long_long) < 0) {
+            zend_error(E_ERROR, "Type error in argument %d of lwes_event_set_U_INT_64. Expected %s", 3-argbase, SWIGTYPE_p_unsigned_long_long->name);
+        }
+        arg3 = *argp;
+    }
+    result = (int)lwes_event_set_U_INT_64(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -1924,7 +1839,7 @@ ZEND_NAMED_FUNCTION(_wrap_set_uint64) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_get_uint64) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_get_U_INT_64) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     unsigned long long *arg3 = (unsigned long long *) 0 ;
@@ -1942,19 +1857,24 @@ ZEND_NAMED_FUNCTION(_wrap_get_uint64) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_uint64. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_U_INT_64. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     if(SWIG_ConvertPtr(*args[2-argbase], (void **) &arg3, SWIGTYPE_p_unsigned_long_long) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_uint64. Expected %s", 3-argbase, SWIGTYPE_p_unsigned_long_long->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_U_INT_64. Expected %s", 3-argbase, SWIGTYPE_p_unsigned_long_long->name);
     }
     
-    result = (int)get_uint64(arg1,arg2,arg3);
+    result = (int)lwes_event_get_U_INT_64(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -1962,10 +1882,10 @@ ZEND_NAMED_FUNCTION(_wrap_get_uint64) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_set_int64) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_set_INT_64) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
-    char *arg3 = (char *) 0 ;
+    long long arg3 ;
     int result;
     zval **args[4];
     int argbase=0 ;
@@ -1980,18 +1900,26 @@ ZEND_NAMED_FUNCTION(_wrap_set_int64) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of set_int64. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_set_INT_64. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
-    
-    convert_to_string_ex(args[2-argbase]);
-    arg3 = (char *) Z_STRVAL_PP(args[2-argbase]);
-    
-    result = (int)set_int64(arg1,arg2,arg3);
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
+    {
+        long long * argp;
+        if(SWIG_ConvertPtr(*args[2-argbase], (void **) &argp, SWIGTYPE_p_long_long) < 0) {
+            zend_error(E_ERROR, "Type error in argument %d of lwes_event_set_INT_64. Expected %s", 3-argbase, SWIGTYPE_p_long_long->name);
+        }
+        arg3 = *argp;
+    }
+    result = (int)lwes_event_set_INT_64(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -1999,7 +1927,7 @@ ZEND_NAMED_FUNCTION(_wrap_set_int64) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_get_int64) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_get_INT_64) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     long long *arg3 = (long long *) 0 ;
@@ -2017,19 +1945,24 @@ ZEND_NAMED_FUNCTION(_wrap_get_int64) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_int64. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_INT_64. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     if(SWIG_ConvertPtr(*args[2-argbase], (void **) &arg3, SWIGTYPE_p_long_long) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_int64. Expected %s", 3-argbase, SWIGTYPE_p_long_long->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_INT_64. Expected %s", 3-argbase, SWIGTYPE_p_long_long->name);
     }
     
-    result = (int)get_int64(arg1,arg2,arg3);
+    result = (int)lwes_event_get_INT_64(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -2037,7 +1970,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_int64) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_set_string) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_set_STRING) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     char *arg3 = (char *) 0 ;
@@ -2055,18 +1988,28 @@ ZEND_NAMED_FUNCTION(_wrap_set_string) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of set_string. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_set_STRING. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
-    
-    convert_to_string_ex(args[2-argbase]);
-    arg3 = (char *) Z_STRVAL_PP(args[2-argbase]);
-    
-    result = (int)set_string(arg1,arg2,arg3);
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
+    {
+        if ((*args[2-argbase])->type == IS_NULL) {
+            arg3 = NULL;
+        } else {
+            convert_to_string_ex(args[2-argbase]);
+            arg3 = Z_STRVAL_PP(args[2-argbase]);
+        }
+        
+    }
+    result = (int)lwes_event_set_STRING(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -2074,7 +2017,7 @@ ZEND_NAMED_FUNCTION(_wrap_set_string) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_get_string) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_get_STRING) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     char **arg3 = (char **) 0 ;
@@ -2092,19 +2035,24 @@ ZEND_NAMED_FUNCTION(_wrap_get_string) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_string. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_STRING. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     if(SWIG_ConvertPtr(*args[2-argbase], (void **) &arg3, SWIGTYPE_p_p_char) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_string. Expected %s", 3-argbase, SWIGTYPE_p_p_char->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_STRING. Expected %s", 3-argbase, SWIGTYPE_p_p_char->name);
     }
     
-    result = (int)get_string(arg1,arg2,arg3);
+    result = (int)lwes_event_get_STRING(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -2112,7 +2060,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_string) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_set_ip_addr) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_set_IP_ADDR_w_string) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     char *arg3 = (char *) 0 ;
@@ -2130,18 +2078,28 @@ ZEND_NAMED_FUNCTION(_wrap_set_ip_addr) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of set_ip_addr. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_set_IP_ADDR_w_string. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
-    
-    convert_to_string_ex(args[2-argbase]);
-    arg3 = (char *) Z_STRVAL_PP(args[2-argbase]);
-    
-    result = (int)set_ip_addr(arg1,arg2,arg3);
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
+    {
+        if ((*args[2-argbase])->type == IS_NULL) {
+            arg3 = NULL;
+        } else {
+            convert_to_string_ex(args[2-argbase]);
+            arg3 = Z_STRVAL_PP(args[2-argbase]);
+        }
+        
+    }
+    result = (int)lwes_event_set_IP_ADDR_w_string(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -2149,7 +2107,7 @@ ZEND_NAMED_FUNCTION(_wrap_set_ip_addr) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_get_ip_addr) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_get_IP_ADDR) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     struct in_addr *arg3 = (struct in_addr *) 0 ;
@@ -2167,19 +2125,24 @@ ZEND_NAMED_FUNCTION(_wrap_get_ip_addr) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_ip_addr. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_IP_ADDR. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     if(SWIG_ConvertPtr(*args[2-argbase], (void **) &arg3, SWIGTYPE_p_in_addr) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_ip_addr. Expected %s", 3-argbase, SWIGTYPE_p_in_addr->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_IP_ADDR. Expected %s", 3-argbase, SWIGTYPE_p_in_addr->name);
     }
     
-    result = (int)get_ip_addr(arg1,arg2,arg3);
+    result = (int)lwes_event_get_IP_ADDR(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -2187,7 +2150,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_ip_addr) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_set_boolean) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_set_BOOLEAN) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     int arg3 ;
@@ -2205,18 +2168,23 @@ ZEND_NAMED_FUNCTION(_wrap_set_boolean) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of set_boolean. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_set_BOOLEAN. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     convert_to_long_ex(args[2-argbase]);
     arg3 = (int) Z_LVAL_PP(args[2-argbase]);
     
-    result = (int)set_boolean(arg1,arg2,arg3);
+    result = (int)lwes_event_set_BOOLEAN(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -2224,7 +2192,7 @@ ZEND_NAMED_FUNCTION(_wrap_set_boolean) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_get_boolean) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_get_BOOLEAN) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
     int *arg3 = (int *) 0 ;
@@ -2245,13 +2213,18 @@ ZEND_NAMED_FUNCTION(_wrap_get_boolean) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of get_boolean. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_BOOLEAN. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    
-    convert_to_string_ex(args[1-argbase]);
-    arg2 = (char *) Z_STRVAL_PP(args[1-argbase]);
-    
+    {
+        if ((*args[1-argbase])->type == IS_NULL) {
+            arg2 = NULL;
+        } else {
+            convert_to_string_ex(args[1-argbase]);
+            arg2 = Z_STRVAL_PP(args[1-argbase]);
+        }
+        
+    }
     
     /* inout typemap for int using convert_to_long_ex and ZVAL_LONG */
     if(SWIG_ConvertPtr(*args[2-argbase], (void **) &arg3, SWIGTYPE_p_int) < 0) {
@@ -2276,12 +2249,12 @@ ZEND_NAMED_FUNCTION(_wrap_get_boolean) {
         } else {
             /* wasn't a pre/ref/thing, OR anything like an int thing */
             force3=0;
-            zend_error(E_ERROR, "Type error in argument %d of get_boolean. Expected %s or at least something looking vaguely like a number hopefully passed by reference", 3-argbase, SWIGTYPE_p_int->name);
+            zend_error(E_ERROR, "Type error in argument %d of lwes_event_get_BOOLEAN. Expected %s or at least something looking vaguely like a number hopefully passed by reference", 3-argbase, SWIGTYPE_p_int->name);
         }
     } else force3=0;
     
     _saved[0] = args[2-argbase];
-    result = (int)get_boolean(arg1,arg2,arg3);
+    result = (int)lwes_event_get_BOOLEAN(arg1,arg2,arg3);
     
     
     ZVAL_LONG(return_value,result);
@@ -2290,7 +2263,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_boolean) {
     if (force3) {
         /* pass back arg3 through params (_saved[0]) if we can */
         if(! PZVAL_IS_REF(*_saved[0])) {
-            zend_error(E_WARNING, "Parameter %d of get_boolean wasn't passed by reference [argout int *, int &]",3-argbase);
+            zend_error(E_WARNING, "Parameter %d of lwes_event_get_BOOLEAN wasn't passed by reference [argout int *, int &]",3-argbase);
         } else {
             ZVAL_LONG(*_saved[0],intr3);	
         }
@@ -2299,7 +2272,7 @@ ZEND_NAMED_FUNCTION(_wrap_get_boolean) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_destroy_event) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_destroy) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     int result;
     zval **args[2];
@@ -2315,10 +2288,10 @@ ZEND_NAMED_FUNCTION(_wrap_destroy_event) {
     
     
     if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **) &arg1, SWIGTYPE_p_lwes_event) < 0) {
-        zend_error(E_ERROR, "Type error in argument %d of destroy_event. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
+        zend_error(E_ERROR, "Type error in argument %d of lwes_event_destroy. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    result = (int)destroy_event(arg1);
+    result = (int)lwes_event_destroy(arg1);
     
     
     ZVAL_LONG(return_value,result);
@@ -2326,8 +2299,9 @@ ZEND_NAMED_FUNCTION(_wrap_destroy_event) {
 }
 
 
-ZEND_NAMED_FUNCTION(_wrap_current_time_millis) {
+ZEND_NAMED_FUNCTION(_wrap_lwes_event_create_no_db) {
     char *arg1 = (char *) 0 ;
+    struct lwes_event *result;
     zval **args[2];
     int argbase=0 ;
     
@@ -2339,12 +2313,19 @@ ZEND_NAMED_FUNCTION(_wrap_current_time_millis) {
         WRONG_PARAM_COUNT;
     }
     
+    {
+        if ((*((0<argbase)?(&this_ptr):(args[0-argbase])))->type == IS_NULL) {
+            arg1 = NULL;
+        } else {
+            convert_to_string_ex(((0<argbase)?(&this_ptr):(args[0-argbase])));
+            arg1 = Z_STRVAL_PP(((0<argbase)?(&this_ptr):(args[0-argbase])));
+        }
+        
+    }
+    result = (struct lwes_event *)lwes_event_create_no_db(arg1);
     
-    convert_to_string_ex(((0<argbase)?(&this_ptr):(args[0-argbase])));
-    arg1 = (char *) Z_STRVAL_PP(((0<argbase)?(&this_ptr):(args[0-argbase])));
     
-    current_time_millis(arg1);
-    
+    SWIG_SetPointerZval(return_value, (void *)result, SWIGTYPE_p_lwes_event, 0);
     
 }
 
