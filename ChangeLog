@@ -1,3 +1,6 @@
+Version 0.0.2 (mlum)
+* Removed support for 64-bit integers in PHP
+
 Version 0.0.1 (mlum)
 * Initial release
 
