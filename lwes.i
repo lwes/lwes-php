@@ -91,22 +91,6 @@ lwes_event_get_INT_32(struct lwes_event *event, char *attribute_name,
                       int *a_int32);
 
 int
-lwes_event_set_U_INT_64(struct lwes_event *event,
-                        char *attribute_name, unsigned long long a_uint64);
-
-int
-lwes_event_get_U_INT_64(struct lwes_event *event, char *attribute_name,
-                        unsigned long long *a_uint64);
-
-int
-lwes_event_set_INT_64(struct lwes_event *event, char *attribute_name,
-                      long long an_int64);
-
-int
-lwes_event_get_INT_64(struct lwes_event *event, char *attribute_name,
-                      long long *an_int64);
-
-int
 lwes_event_set_STRING(struct lwes_event *event, char *attribute_name,
                       char *a_string);
 

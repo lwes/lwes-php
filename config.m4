@@ -24,6 +24,7 @@ dnl  AC_DEFINE_UNQUOTED(PHP_LWES_DIR, "$LWES_DIR", [ ])
 dnl  PHP_EXTENSION(lwes, $ext_shared)
 
   CFLAGS=`$PKG_CONFIG --cflags lwes-0`
+  LDFLAGS=`$PKG_CONFIG --libs lwes-0`
 
   PHP_NEW_EXTENSION(lwes, lwes_wrap.c, $ext_shared)
 fi
