@@ -1,4 +1,10 @@
-%module lwes 
+%module lwes
+
+%pragma(php4) phpinfo="
+  php_info_print_table_start();
+  php_info_print_table_header(2, \"LWES support\", \"enabled\");
+  php_info_print_table_end();
+"
 
 %{
 #include "lwes.h"

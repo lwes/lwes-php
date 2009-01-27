@@ -728,17 +728,15 @@ type_error:
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_lwes_event_type_db swig_types[0] 
-#define  SWIGTYPE_p_unsigned_long_long swig_types[1] 
-#define  SWIGTYPE_p_long_long swig_types[2] 
-#define  SWIGTYPE_p_in_addr swig_types[3] 
-#define  SWIGTYPE_p_lwes_emitter swig_types[4] 
-#define  SWIGTYPE_p_p_char swig_types[5] 
-#define  SWIGTYPE_p_lwes_event swig_types[6] 
-#define  SWIGTYPE_p_unsigned_int swig_types[7] 
-#define  SWIGTYPE_p_unsigned_short swig_types[8] 
-#define  SWIGTYPE_p_short swig_types[9] 
-#define  SWIGTYPE_p_int swig_types[10] 
-static swig_type_info *swig_types[12];
+#define  SWIGTYPE_p_in_addr swig_types[1] 
+#define  SWIGTYPE_p_lwes_emitter swig_types[2] 
+#define  SWIGTYPE_p_p_char swig_types[3] 
+#define  SWIGTYPE_p_lwes_event swig_types[4] 
+#define  SWIGTYPE_p_unsigned_int swig_types[5] 
+#define  SWIGTYPE_p_unsigned_short swig_types[6] 
+#define  SWIGTYPE_p_short swig_types[7] 
+#define  SWIGTYPE_p_int swig_types[8] 
+static swig_type_info *swig_types[10];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -868,8 +866,6 @@ zend_module_entry* SWIG_module_entry = &lwes_module_entry;
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_lwes_event_type_db[] = {{"_p_lwes_event_type_db", 0, "struct lwes_event_type_db *", 0, 0, 0, 0},{"_p_lwes_event_type_db", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_unsigned_long_long[] = {{"_p_unsigned_long_long", 0, "unsigned long long *", 0, 0, 0, 0},{"_p_unsigned_long_long", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_long_long[] = {{"_p_long_long", 0, "long long *", 0, 0, 0, 0},{"_p_long_long", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_in_addr[] = {{"_p_in_addr", 0, "struct in_addr *", 0, 0, 0, 0},{"_p_in_addr", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_lwes_emitter[] = {{"_p_lwes_emitter", 0, "struct lwes_emitter *", 0, 0, 0, 0},{"_p_lwes_emitter", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_p_char[] = {{"_p_p_char", 0, "char **", 0, 0, 0, 0},{"_p_p_char", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -881,8 +877,6 @@ static swig_type_info _swigt__p_int[] = {{"_p_int", 0, "int *", 0, 0, 0, 0},{"_p
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_lwes_event_type_db, 
-_swigt__p_unsigned_long_long, 
-_swigt__p_long_long, 
 _swigt__p_in_addr, 
 _swigt__p_lwes_emitter, 
 _swigt__p_p_char, 
@@ -899,8 +893,6 @@ _swigt__p_int,
 
 /* vdecl subsection */
 static int le_swig__p_lwes_event_type_db=0; /* handle for  */
-static int le_swig__p_unsigned_long_long=0; /* handle for  */
-static int le_swig__p_long_long=0; /* handle for  */
 static int le_swig__p_in_addr=0; /* handle for  */
 static int le_swig__p_lwes_emitter=0; /* handle for  */
 static int le_swig__p_p_char=0; /* handle for  */
@@ -1786,7 +1778,6 @@ ZEND_NAMED_FUNCTION(_wrap_lwes_event_get_INT_32) {
 }
 
 
-
 ZEND_NAMED_FUNCTION(_wrap_lwes_event_set_STRING) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
     char *arg2 = (char *) 0 ;
@@ -2152,14 +2143,6 @@ static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_lwes_event_type_db) {
 /* bah! No destructor for this simple type!! */
 }
 /* NEW Destructor style */
-static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_unsigned_long_long) {
-/* bah! No destructor for this simple type!! */
-}
-/* NEW Destructor style */
-static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_long_long) {
-/* bah! No destructor for this simple type!! */
-}
-/* NEW Destructor style */
 static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_in_addr) {
 /* bah! No destructor for this simple type!! */
 }
@@ -2197,15 +2180,12 @@ static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_int) {
 
 /* end wrapper section */
 /* init section */
-#ifdef COMPILE_DL_LWES
 #ifdef __cplusplus
 extern "C" {
 #endif
 ZEND_GET_MODULE(lwes)
 #ifdef __cplusplus
 }
-#endif
-
 #endif
 
 PHP_MSHUTDOWN_FUNCTION(lwes)
@@ -2223,10 +2203,6 @@ PHP_MINIT_FUNCTION(lwes)
 /* Register resource destructors for pointer types */
 le_swig__p_lwes_event_type_db=zend_register_list_destructors_ex(_wrap_destroy_p_lwes_event_type_db,NULL,(char *)(SWIGTYPE_p_lwes_event_type_db->name),module_number);
 SWIG_TypeClientData(SWIGTYPE_p_lwes_event_type_db,&le_swig__p_lwes_event_type_db);
-le_swig__p_unsigned_long_long=zend_register_list_destructors_ex(_wrap_destroy_p_unsigned_long_long,NULL,(char *)(SWIGTYPE_p_unsigned_long_long->name),module_number);
-SWIG_TypeClientData(SWIGTYPE_p_unsigned_long_long,&le_swig__p_unsigned_long_long);
-le_swig__p_long_long=zend_register_list_destructors_ex(_wrap_destroy_p_long_long,NULL,(char *)(SWIGTYPE_p_long_long->name),module_number);
-SWIG_TypeClientData(SWIGTYPE_p_long_long,&le_swig__p_long_long);
 le_swig__p_in_addr=zend_register_list_destructors_ex(_wrap_destroy_p_in_addr,NULL,(char *)(SWIGTYPE_p_in_addr->name),module_number);
 SWIG_TypeClientData(SWIGTYPE_p_in_addr,&le_swig__p_in_addr);
 le_swig__p_lwes_emitter=zend_register_list_destructors_ex(_wrap_destroy_p_lwes_emitter,NULL,(char *)(SWIGTYPE_p_lwes_emitter->name),module_number);
@@ -2264,5 +2240,10 @@ PHP_RSHUTDOWN_FUNCTION(lwes)
 }
 PHP_MINFO_FUNCTION(lwes)
 {
+
+  php_info_print_table_start();
+  php_info_print_table_header(2, "LWES support", "enabled");
+  php_info_print_table_end();
+
 }
 /* end init section */
