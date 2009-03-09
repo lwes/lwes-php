@@ -1,3 +1,6 @@
+Version 0.0.3 (mlum)
+* Enabled phpinfo hooks
+
 Version 0.0.2 (mlum)
 * Removed support for 64-bit integers in PHP
 
