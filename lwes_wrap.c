@@ -680,7 +680,7 @@ SWIG_ZTS_ConvertResourcePtr(zval *z, void **ptr, swig_type_info *ty TSRMLS_DC) {
   p = value->ptr;
   if (type==-1) return -1;
 
-  type_name=zend_rsrc_list_get_rsrc_type(z->value.lval);
+  type_name=zend_rsrc_list_get_rsrc_type(z->value.lval TSRMLS_CC);
 
   return SWIG_ZTS_ConvertResourceData(p,type,type_name,ptr,ty TSRMLS_CC);
 }
@@ -936,7 +936,6 @@ ZEND_NAMED_FUNCTION(_wrap_lwes_event_type_db_create) {
 
 ZEND_NAMED_FUNCTION(_wrap_lwes_event_type_db_destroy) {
     struct lwes_event_type_db *arg1 = (struct lwes_event_type_db *) 0 ;
-    int result;
     zval **args[2];
     int argbase=0 ;
     
@@ -958,10 +957,15 @@ ZEND_NAMED_FUNCTION(_wrap_lwes_event_type_db_destroy) {
         }
         
     }
-    result = (int)lwes_event_type_db_destroy(arg1);
     
-    
-    ZVAL_LONG(return_value,result);
+    if (arg1) {
+        swig_object_wrapper *sw;
+        zval **link = ((0<argbase)?(&this_ptr):(args[0-argbase]));
+        ZEND_FETCH_RESOURCE(sw, swig_object_wrapper *, link, -1, "LWES Event DB", le_swig__p_lwes_event_type_db);
+        zend_list_delete(Z_RESVAL_P(*link));
+    }
+
+    ZVAL_LONG(return_value,1);
     
 }
 
@@ -1176,7 +1180,6 @@ ZEND_NAMED_FUNCTION(_wrap_lwes_emitter_emitto) {
 
 ZEND_NAMED_FUNCTION(_wrap_lwes_emitter_destroy) {
     struct lwes_emitter *arg1 = (struct lwes_emitter *) 0 ;
-    int result;
     zval **args[2];
     int argbase=0 ;
     
@@ -1193,10 +1196,14 @@ ZEND_NAMED_FUNCTION(_wrap_lwes_emitter_destroy) {
         zend_error(E_ERROR, "Type error in argument %d of lwes_emitter_destroy. Expected %s", 1-argbase, SWIGTYPE_p_lwes_emitter->name);
     }
     
-    result = (int)lwes_emitter_destroy(arg1);
+    if (arg1) {
+        swig_object_wrapper *sw;
+        zval **link = ((0<argbase)?(&this_ptr):(args[0-argbase]));
+        ZEND_FETCH_RESOURCE(sw, swig_object_wrapper *, link, -1, "LWES Emitter", le_swig__p_lwes_emitter);
+        zend_list_delete(Z_RESVAL_P(*link));
+    }
     
-    
-    ZVAL_LONG(return_value,result);
+    ZVAL_LONG(return_value,1);
     
 }
 
@@ -1222,6 +1229,15 @@ ZEND_NAMED_FUNCTION(_wrap_lwes_event_create) {
         } else {
             if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **)&arg1, SWIGTYPE_p_lwes_event_type_db) < 0) {
                 arg1 = NULL;
+            } else {
+                swig_object_wrapper *sw;
+                zval **link = ((0<argbase)?(&this_ptr):(args[0-argbase]));
+                ZEND_FETCH_RESOURCE(sw, swig_object_wrapper *, link, -1, "LWES Event DB", le_swig__p_lwes_event_type_db);
+                if (link) {
+                    zend_list_addref(Z_RESVAL_PP(link));
+                } else {
+                    zend_error(E_ERROR, "Invalid event typedb resource");
+                }
             }
         }
         
@@ -1235,6 +1251,7 @@ ZEND_NAMED_FUNCTION(_wrap_lwes_event_create) {
         }
         
     }
+
     result = (struct lwes_event *)lwes_event_create(arg1,arg2);
     
     
@@ -1265,6 +1282,15 @@ ZEND_NAMED_FUNCTION(_wrap_lwes_event_create_with_encoding) {
         } else {
             if(SWIG_ConvertPtr(*((0<argbase)?(&this_ptr):(args[0-argbase])), (void **)&arg1, SWIGTYPE_p_lwes_event_type_db) < 0) {
                 arg1 = NULL;
+            } else {
+                swig_object_wrapper *sw;
+                zval **link = ((0<argbase)?(&this_ptr):(args[0-argbase]));
+                ZEND_FETCH_RESOURCE(sw, swig_object_wrapper *, link, -1, "LWES Event DB", le_swig__p_lwes_event_type_db);
+                if (link) {
+                    zend_list_addref(Z_RESVAL_PP(link));
+                } else {
+                    zend_error(E_ERROR, "Invalid event typedb resource");
+                }
             }
         }
         
@@ -2082,7 +2108,6 @@ ZEND_NAMED_FUNCTION(_wrap_lwes_event_get_BOOLEAN) {
 
 ZEND_NAMED_FUNCTION(_wrap_lwes_event_destroy) {
     struct lwes_event *arg1 = (struct lwes_event *) 0 ;
-    int result;
     zval **args[2];
     int argbase=0 ;
     
@@ -2099,10 +2124,14 @@ ZEND_NAMED_FUNCTION(_wrap_lwes_event_destroy) {
         zend_error(E_ERROR, "Type error in argument %d of lwes_event_destroy. Expected %s", 1-argbase, SWIGTYPE_p_lwes_event->name);
     }
     
-    result = (int)lwes_event_destroy(arg1);
+    if (arg1) {
+        swig_object_wrapper *sw;
+        zval **link = ((0<argbase)?(&this_ptr):(args[0-argbase]));
+        ZEND_FETCH_RESOURCE(sw, swig_object_wrapper *, link, -1, "LWES Event", le_swig__p_lwes_event);
+        zend_list_delete(Z_RESVAL_P(*link));
+    }
     
-    
-    ZVAL_LONG(return_value,result);
+    ZVAL_LONG(return_value,1);
     
 }
 
@@ -2140,39 +2169,69 @@ ZEND_NAMED_FUNCTION(_wrap_lwes_event_create_no_db) {
 
 /* NEW Destructor style */
 static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_lwes_event_type_db) {
-/* bah! No destructor for this simple type!! */
+    swig_object_wrapper *ptr;
+    if (ptr = rsrc->ptr) {
+        lwes_event_type_db_destroy((struct lwes_event_type_db *)ptr->ptr);
+        efree(ptr);
+    }
 }
 /* NEW Destructor style */
 static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_in_addr) {
-/* bah! No destructor for this simple type!! */
+    swig_object_wrapper *ptr;
+    if (ptr = rsrc->ptr) {
+        efree(ptr);
+    }
 }
 /* NEW Destructor style */
 static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_lwes_emitter) {
-/* bah! No destructor for this simple type!! */
+    swig_object_wrapper *ptr;
+    if (ptr = rsrc->ptr) {
+        lwes_emitter_destroy((struct lwes_emitter *)ptr->ptr);
+        efree(ptr);
+    }
 }
 /* NEW Destructor style */
 static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_p_char) {
-/* bah! No destructor for this simple type!! */
+    swig_object_wrapper *ptr;
+    if (ptr = rsrc->ptr) {
+        efree(ptr);
+    }
 }
 /* NEW Destructor style */
 static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_lwes_event) {
-/* bah! No destructor for this simple type!! */
+    swig_object_wrapper *ptr;
+    if (ptr = rsrc->ptr) {
+        lwes_event_destroy((struct lwes_event *)ptr->ptr);
+        efree(ptr);
+    }
 }
 /* NEW Destructor style */
 static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_unsigned_int) {
-/* bah! No destructor for this simple type!! */
+    swig_object_wrapper *ptr;
+    if (ptr = rsrc->ptr) {
+        efree(ptr);
+    }
 }
 /* NEW Destructor style */
 static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_unsigned_short) {
-/* bah! No destructor for this simple type!! */
+    swig_object_wrapper *ptr;
+    if (ptr = rsrc->ptr) {
+        efree(ptr);
+    }
 }
 /* NEW Destructor style */
 static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_short) {
-/* bah! No destructor for this simple type!! */
+    swig_object_wrapper *ptr;
+    if (ptr = rsrc->ptr) {
+        efree(ptr);
+    }
 }
 /* NEW Destructor style */
 static ZEND_RSRC_DTOR_FUNC(_wrap_destroy_p_int) {
-/* bah! No destructor for this simple type!! */
+    swig_object_wrapper *ptr;
+    if (ptr = rsrc->ptr) {
+        efree(ptr);
+    }
 }
 
 
