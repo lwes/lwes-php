@@ -1,3 +1,9 @@
+Version 0.0.4 (ciaccia)
+* Added proper destructors for resources and custom types
+* Modified *_destroy functions to just remove the reference, so the ZE will call the destructor when necessary
+* Fixed segmentation fault when destroying an event type used in an emitter 
+* Added a few tests
+
 Version 0.0.3 (mlum)
 * Enabled phpinfo hooks
 
