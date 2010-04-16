@@ -26,7 +26,7 @@ if ((*$input)->type == IS_NULL) {
 if ((*$input)->type == IS_NULL) {
   $1 = NULL;
 } else {
-  if(SWIG_ConvertPtr(*$input, (void **)&$1, $1_descriptor) < 0) {
+  if(SWIG_ConvertPtr(*$input, (void **)&$1, $1_descriptor, 0) < 0) {
     $1 = NULL;
   }
 }
@@ -95,6 +95,22 @@ lwes_event_set_INT_32(struct lwes_event *event, char *attribute_name,
 int
 lwes_event_get_INT_32(struct lwes_event *event, char *attribute_name,
                       int *a_int32);
+
+int
+lwes_event_set_U_INT_64(struct lwes_event *event, char *attribute_name,
+                        unsigned long a_uint64);
+
+int
+lwes_event_get_U_INT_64(struct lwes_event *event, char *attribute_name,
+                        unsigned long &a_uint64);
+
+int 
+lwes_event_set_INT_64(struct lwes_event *event, char *attribute_name,
+                      long a_uint64);
+
+int
+lwes_event_get_INT_64(struct lwes_event *event, char *attribute_name,
+                      long &a_uint64);
 
 int
 lwes_event_set_STRING(struct lwes_event *event, char *attribute_name,

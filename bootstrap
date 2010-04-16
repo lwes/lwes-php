@@ -1,4 +1,5 @@
 #!/bin/sh
 
+swig -php5 lwes.i
 phpize
 

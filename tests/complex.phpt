@@ -14,6 +14,7 @@ var_dump($event);
 
 lwes_event_set_STRING($event, "username",  "bob"); 
 lwes_event_set_U_INT_32($event, "password",  0xdeadbeef); 
+lwes_event_set_U_INT_64($event, "uuid", 0xdeadbeef);
 lwes_event_set_IP_ADDR_w_string($event, "clientIP",  "127.0.0.1"); 
 lwes_event_set_BOOLEAN($event, "successful", 0); 
 lwes_emitter_emit($emitter, $event); 

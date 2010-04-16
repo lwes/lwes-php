@@ -16,10 +16,8 @@ lwes_event_set_U_INT_32($event, "c",   65536);
 lwes_event_set_INT_32($event,   "d",  -65536); 
 lwes_event_set_STRING($event,   "e",   "foo"); 
 lwes_event_set_BOOLEAN($event,  "f",   true); 
-
-// n.a. (yet?)
-// lwes_event_set_U_INT_64($event, "g",   65536); 
-// lwes_event_set_INT_64($event,   "h",   -65536); 
+lwes_event_set_U_INT_64($event, "g",   65536); 
+lwes_event_set_INT_64($event,   "h",   -65536); 
 
 lwes_event_set_IP_ADDR_w_string($event, "i",   "127.0.0.1");
 
